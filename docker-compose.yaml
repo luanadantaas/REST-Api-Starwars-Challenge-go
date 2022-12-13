@@ -14,17 +14,15 @@ services:
     expose:
       - '3306'
     volumes:
-      - data:/var/lib/mysql
+      #- data:/var/lib/mysql
       - ./create-tables.sql:/data/init/create-tables.sql
 
   api:
     build:
       context: .
-      dockerfile: ./build/grpc/Dockerfile
+      dockerfile: ./build/api/Dockerfile
     environment:
       DATABASE: db
-      REDIS_PORT: cache:6379
-      REDIS_PASSWORD: eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
     ports:
       - 8080:8080
     expose:
