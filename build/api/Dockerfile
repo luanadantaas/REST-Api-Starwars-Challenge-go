@@ -12,4 +12,4 @@ COPY --from=build /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=build /etc/passwd /etc/passwd
 COPY --from=build /builds/* ./
 RUN chmod 755 ./*
-CMD ["/app/api"]
+CMD ["./api"]
