@@ -8,6 +8,14 @@ type Planet struct {
 	Appearances int    `json:"appearances"`
 }
 
+type ApiResponse struct {
+	Result []results `json:"results"`
+}
+
+type results struct {
+	Films []string `json:"films"`
+}
+
 func (*Planet) TableName() string {
 	return "planet"
 }

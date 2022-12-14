@@ -3,7 +3,7 @@ WORKDIR /app
 RUN apk update && apk add --no-cache tzdata ca-certificates gcc musl-dev libc-dev git
 COPY . .
 RUN go mod download && mkdir /builds
-RUN go build -ldflags '-extldflags "-fno-PIC -static"' -buildmode pie -tags 'osusergo netgo static_build' -o /builds/api
+RUN cd cmd/api && go build -ldflags '-extldflags "-fno-PIC -static"' -buildmode pie -tags 'osusergo netgo static_build' -o /builds/api
 
 FROM alpine:latest as production
 WORKDIR /app

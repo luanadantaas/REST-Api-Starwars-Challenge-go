@@ -1,4 +1,4 @@
-package connection
+package swapi
 
 import (
 	"encoding/json"
@@ -8,7 +8,7 @@ import (
 	"starwars/src/logger"
 )
 
-func ConnectApi(name string) entity.Planet {
+func GetAppearances(name string) int {
 	response, err := http.Get("https://swapi.dev/api/planets?search=" + name)
 	if err != nil {
 		logger.Log().Warn("%v", err)
@@ -18,8 +18,12 @@ func ConnectApi(name string) entity.Planet {
 	if err != nil {
 		logger.Log().Warn("%v", err)
 	}
-	var responseObject entity.Planet
+	var responseObject entity.ApiResponse
 	json.Unmarshal(responseData, &responseObject)
 
-	return responseObject
+	if len(responseObject.Result) > 0 {
+		return len(responseObject.Result[0].Films)
+	}
+
+	return 0
 }
